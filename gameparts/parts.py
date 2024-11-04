@@ -4,7 +4,8 @@ class Board:
 
     def __init__(self):
         self.field_size = 3  # Размер игрового поля
-        self.board = [[' ' for _ in range(self.field_size)] for _ in range(self.field_size)]
+        size = self.field_size
+        self.board = [[' '] * size for _ in range(size)]
 
     # Метод, который обрабатывает ходы игроков.
     def make_move(self, row, col, player):
