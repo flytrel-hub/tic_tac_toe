@@ -2,6 +2,12 @@ from gameparts import Board
 from gameparts.exceptions import CellOccupiedError, FieldIndexError
 
 
+def save_result(result):
+    file = open('result.txt', 'a', encoding='utf-8')
+    file.write(result + '\n')
+    file.close()
+
+
 def main():
     # Создать игровое поле - объект класса Board.
     # Запускается бесконечный цикл.
@@ -54,7 +60,8 @@ def main():
                 continue
             except ValueError:
                 print('Буквы вводить нельзя. Только числа.')
-                print('Пожалуйста, введите значения для строки и столбца заново.')
+                print('Пожалуйста,'
+                      'введите значения для строки и столбца заново.')
                 continue
             except Exception as e:
                 print(f'Возникла ошибка: {e}')
@@ -69,10 +76,14 @@ def main():
         game.display()
         # После каждого хода надо делать проверку на победу и на ничью.
         if game.check_win(current_player):
-            print(f'Победили {current_player}.')
+            result = f'Победили {current_player}.'
+            print(result)
+            save_result(result)
             running = False
         elif game.is_board_full():
-            print('Ничья!')
+            result = 'Ничья!'
+            print(result)
+            save_result(result)
             running = False
 
         # Тернарный оператор, через который реализована смена игроков.
